@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:jaxws="http://cxf.apache.org/jaxws"  
+    xmlns:cxf="http://cxf.apache.org/core"  
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+    http://cxf.apache.org/jaxws   
+    http://cxf.apache.org/schemas/jaxws.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd">  
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@172.20.10.48:1521:ICHDB" />
+        <property name="username" value="JAVAHIS" />
+		<property name="password" value="teda3254" />
+    </bean>
+      
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+         <property name="configLocation" value="classpath:mybatis-config.xml"></property>  
+    </bean>
+    
+    <!--不用这种方式，这正房是会造成knowledgebase的bean不唯一，内存溢出-->
+<!--    <bean id="knowledgeBaseTool" class="com.zhangp.drools.KnowledgeBaseTool"/>-->
+    
+    <context:component-scan base-package="com.zhangp" />
+    
+    <import resource="classpath:applicationContext-jobs.xml"/>
+    <import resource="classpath:applicationContext-pojo.xml" />
+	<import resource="classpath:applicationContext-dao.xml" />
+	
+    <import resource="classpath:META-INF/cxf/cxf.xml" />  
+      
+<!--	<bean id="test" class="com.zhangp.service.TestImpl"/>
+		<jaxws:endpoint id="testend" implementor="#test" address="/Test" />  -->
+		
+<!--	<bean id="demo2" class="com.zhangp.service.Demo2Impl"/>-->
+<!--	<jaxws:endpoint id="demo2end" implementor="#demo2" address="/Demo2" />-->
+	
+<!--	<bean id="demo3" class="com.zhangp.service.Demo3Impl"/>-->
+<!--	<jaxws:endpoint id="demo3end" implementor="#demo3" address="/Demo3" />-->
+
+	<bean id="cdss" class="com.zhangp.service.CDSSImpl"/>
+	<jaxws:endpoint id="cdssend" implementor="#cdss" address="/cdss" />
+	
+	<bean id="cdss1" class="com.zhangp.service.CDSS1Impl"/>
+	<jaxws:endpoint id="cdss1end" implementor="#cdss1" address="/cdss1" />
+	
+	<bean id="cdss2" class="com.zhangp.service.CDSS2Impl"/>
+	<jaxws:endpoint id="cdss2end" implementor="#cdss2" address="/cdss2" />
+	
+	<bean id="cdss3" class="com.zhangp.service.CDSS3Impl"/>
+	<jaxws:endpoint id="cdss3end" implementor="#cdss3" address="/cdss3" />
+	
+	<bean id="cdss4" class="com.zhangp.service.CDSS4Impl"/>
+	<jaxws:endpoint id="cdss4end" implementor="#cdss4" address="/cdss4" />
+  
+</beans>

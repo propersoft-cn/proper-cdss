@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhangp.dao.BreakPointDao">
+
+	<select id="getBreakPointByCondition" resultType="BreakPoint" parameterType="BreakPoint">
+		SELECT ID id, MR_NO mrNo, FLOW_ID flowId, NODE_ID nodeId, CREAT_DATE creatDate
+			FROM DROOLS_BREAK_POINT
+   		<where> 
+			<if test="mrNo != null">
+			     MR_NO = #{mrNo} 
+			</if>
+		</where> 
+	</select>
+	
+	<insert id="insertBreakPoint" parameterType="BreakPoint">
+		<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+			SELECT SYS_GUID() FROM DUAL
+		</selectKey>
+		INSERT INTO DROOLS_BREAK_POINT
+		(
+			ID,
+			MR_NO,
+			FLOW_ID, 
+			NODE_ID, 
+			CREAT_DATE
+		) 
+		VALUES
+		(
+			#{id,jdbcType=VARCHAR},
+			#{mrNo,jdbcType=VARCHAR},
+			#{flowId,jdbcType=VARCHAR}, 
+			#{nodeId,jdbcType=VARCHAR}, 
+			#{creatDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<update id="updateBreakPoint" parameterType="BreakPoint">
+   		UPDATE DROOLS_BREAK_POINT
+		<set>
+			MR_NO = #{mrNo,jdbcType=VARCHAR},
+			FLOW_ID = #{flowId,jdbcType=VARCHAR}, 
+			NODE_ID = #{nodeId,jdbcType=VARCHAR}, 
+			CREAT_DATE = #{creatDate,jdbcType=TIMESTAMP}
+		</set>
+		WHERE ID = #{id}
+	</update>
+   
+	<delete id="deleteBreakPoint" parameterType="BreakPoint">
+   		DELETE DROOLS_BREAK_POINT WHERE ID=#{id} 
+	</delete>
+
+</mapper>

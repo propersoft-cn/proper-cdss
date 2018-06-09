@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+    <typeAliases>
+  	   <typeAlias type="com.zhangp.pojo.Test" alias="Test"/>
+  	   <typeAlias type="com.zhangp.pojo.BreakPoint" alias="BreakPoint"/>
+ 	</typeAliases>
+    <mappers>  
+  		 <mapper resource="com/zhangp/dao/mapper/TestMapper.xml" /> 
+  		 <mapper resource="com/zhangp/dao/mapper/BreakPointMapper.xml" /> 
+    </mappers>  
+</configuration>

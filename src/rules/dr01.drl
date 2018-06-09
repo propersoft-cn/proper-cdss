@@ -1,0 +1,302 @@
+//created on: 2017-1-4
+package com.zhangp.dr01
+
+//list any import classes here.
+import com.zhangp.pojo.MroPojo;
+import com.zhangp.pojo.OpPojo;
+
+
+
+//declare any global variables here
+
+
+
+
+rule "dr01.01"
+
+	no-loop true
+
+	ruleflow-group "not med"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	//外科无手术
+    	$mroPojo.getDiseases().add("011201");
+end
+
+rule "dr01.02"
+
+	no-loop true
+
+	ruleflow-group "med"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesMedDiseases();
+    	update($mroPojo);
+end
+
+rule "dr01.03"
+
+	no-loop true
+
+	ruleflow-group "no bind"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	//内科无手术
+    	$mroPojo.getDiseases().add("021305");
+end
+
+rule "dr01.04"
+
+	no-loop true
+
+	ruleflow-group "rule1"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases1();
+    	update($mroPojo);
+end
+
+rule "dr01.05"
+
+	no-loop true
+
+	ruleflow-group "rule2"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases2();
+    	update($mroPojo);
+end
+
+rule "dr01.06"
+
+	no-loop true
+
+	ruleflow-group "rule3.1"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.setWeight(0);
+    	$mroPojo.fireRulesOpDiseases3();
+    	update($mroPojo);
+end
+
+rule "dr01.07"
+
+	no-loop true
+
+	ruleflow-group "rule3.2"
+
+    when
+        $mroPojo:MroPojo( weight == 1 )
+    then
+    	//冠状动脉支架置入术（1支）
+    	$mroPojo.getDiseases().add("020201");
+    	update($mroPojo);
+end
+
+rule "dr01.08"
+
+	no-loop true
+
+	ruleflow-group "rule3.2"
+
+    when
+        $mroPojo:MroPojo( weight == 2 )
+    then
+    	//冠状动脉支架置入术（2支）
+    	$mroPojo.getDiseases().add("020202");
+    	update($mroPojo);
+end
+
+rule "dr01.09"
+
+	no-loop true
+
+	ruleflow-group "rule3.2"
+
+    when
+        $mroPojo:MroPojo( weight == 3 )
+    then
+    	//冠状动脉支架置入术（3支）
+    	$mroPojo.getDiseases().add("020203");
+    	update($mroPojo);
+end
+
+rule "dr01.10"
+
+	no-loop true
+
+	ruleflow-group "rule3.2"
+
+    when
+        $mroPojo:MroPojo( weight == 4 )
+    then
+    	//冠状动脉支架置入术（4支）
+    	$mroPojo.getDiseases().add("020204");
+    	update($mroPojo);
+end
+
+rule "dr01.11"
+
+	no-loop true
+
+	ruleflow-group "rule3.2"
+
+    when
+        $mroPojo:MroPojo( weight == 5 )
+    then
+    	//冠状动脉支架置入术（5支）
+    	$mroPojo.getDiseases().add("020205");
+    	update($mroPojo);
+end
+
+rule "dr01.12"
+
+	no-loop true
+
+	ruleflow-group "rule4.1"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases4();
+    	update($mroPojo);
+end
+
+rule "dr01.14"
+
+	no-loop true
+
+	ruleflow-group "rule5.1"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.setWeight(0);
+    	$mroPojo.fireRulesOpDiseases5();
+    	update($mroPojo);
+end
+
+rule "dr01.15"
+
+	no-loop true
+
+	ruleflow-group "rule5.2"
+
+    when
+        $mroPojo:MroPojo( weight == 1 )
+    then
+    	//瓣膜置换术（单瓣）
+    	$mroPojo.getDiseases().add("010201");
+    	update($mroPojo);
+end
+
+rule "dr01.16"
+
+	no-loop true
+
+	ruleflow-group "rule5.2"
+
+    when
+        $mroPojo:MroPojo( weight == 2 )
+    then
+    	//瓣膜置换术（双瓣）
+    	$mroPojo.getDiseases().add("010202");
+    	update($mroPojo);
+end
+
+rule "dr01.17"
+
+	no-loop true
+
+	ruleflow-group "rule6.1"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases61();
+    	update($mroPojo);
+end
+
+rule "dr01.18"
+
+	no-loop true
+
+	ruleflow-group "rule6.2"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases62();
+    	update($mroPojo);
+end
+
+rule "dr01.19"
+
+	no-loop true
+
+	ruleflow-group "rule7.1"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases71();
+    	update($mroPojo);
+end
+
+rule "dr01.20"
+
+	no-loop true
+
+	ruleflow-group "rule7.2"
+
+    when
+        $mroPojo:MroPojo()
+    then
+    	$mroPojo.fireRulesOpDiseases72();
+    	update($mroPojo);
+end
+
+rule "dr01.21"
+
+	no-loop true
+
+	ruleflow-group "rule8.1"
+
+    when
+        $mroPojo:MroPojo( $opBookPojos:opBookPojos )
+        OpPojo( isOpDept == 'Y' ) from $opBookPojos
+    then
+    	//外科其他手术
+    	if(!$mroPojo.getDiseases().contains("011101")){
+    		$mroPojo.getDiseases().add("011101");
+    	}
+    	update($mroPojo);
+end
+
+rule "dr01.22"
+
+	no-loop true
+
+	ruleflow-group "rule8.2"
+
+    when
+        $mroPojo:MroPojo( $opBookPojos:opBookPojos )
+        OpPojo( isOpDept != 'Y' ) from $opBookPojos
+    then
+    	//内科其他手术
+    	if(!$mroPojo.getDiseases().contains("021201")){
+    		$mroPojo.getDiseases().add("021201");
+    	}
+end

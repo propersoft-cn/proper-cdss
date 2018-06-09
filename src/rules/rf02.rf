@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="mro02" id="mro02" package-name="com.zhangp.rf02" >
+
+  <header>
+    <imports>
+      <import name="com.zhangp.pojo.MroPojo" />
+    </imports>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="139" y="16" width="48" height="48" />
+    <end id="3" name="End" x="68" y="257" width="49" height="49" />
+    <subProcess id="4" name="Rule9" x="37" y="177" width="110" height="48" processId="mro01" >
+    </subProcess>
+    <split id="5" name="Gateway" x="139" y="96" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="28" toType="DROOLS_DEFAULT" name="op" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="4" toType="DROOLS_DEFAULT" name="no op" priority="1" type="rule" dialect="mvel" >MroPojo( opPojos.size()  &lt; 1 )</constraint>
+      </constraints>
+    </split>
+    <ruleSet id="6" name="Rule1" x="64" y="1143" width="110" height="48" ruleFlowGroup="rule1" />
+    <split id="7" name="Gateway" x="95" y="1223" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="9" toType="DROOLS_DEFAULT" name="has diseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+        <constraint toNodeId="37" toType="DROOLS_DEFAULT" name="has diseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <ruleSet id="8" name="Rule2" x="150" y="982" width="80" height="48" ruleFlowGroup="rule2" />
+    <end id="9" name="End" x="16" y="1304" width="80" height="48" />
+    <split id="10" name="Gateway" x="166" y="1062" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="11" toType="DROOLS_DEFAULT" name="has deseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+        <constraint toNodeId="6" toType="DROOLS_DEFAULT" name="no deseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <end id="11" name="End" x="206" y="1143" width="110" height="48" />
+    <subProcess id="14" name="Rule3" x="200" y="821" width="110" height="48" processId="mro03" >
+    </subProcess>
+    <split id="15" name="Gateway" x="231" y="901" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="8" toType="DROOLS_DEFAULT" name="no deseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="17" toType="DROOLS_DEFAULT" name="has diseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+      </constraints>
+    </split>
+    <end id="17" name="End" x="262" y="982" width="110" height="48" />
+    <end id="19" name="End" x="107" y="338" width="110" height="48" />
+    <split id="18" name="Gateway" x="210" y="257" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="30" toType="DROOLS_DEFAULT" name="no deseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="19" toType="DROOLS_DEFAULT" name="has diseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+      </constraints>
+    </split>
+    <split id="23" name="Gateway" x="222" y="579" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="25" toType="DROOLS_DEFAULT" name="has diseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+        <constraint toNodeId="27" toType="DROOLS_DEFAULT" name="no diseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <subProcess id="22" name="Rule5" x="191" y="499" width="110" height="48" processId="mro05" >
+    </subProcess>
+    <end id="25" name="End" x="116" y="660" width="110" height="48" />
+    <subProcess id="27" name="Rule6" x="258" y="660" width="110" height="48" processId="mro06" >
+    </subProcess>
+    <split id="29" name="Gateway" x="289" y="740" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="32" toType="DROOLS_DEFAULT" name="has diseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+        <constraint toNodeId="14" toType="DROOLS_DEFAULT" name="no deseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <ruleSet id="28" name="Rule4" x="179" y="177" width="110" height="48" ruleFlowGroup="rule4.1" />
+    <subProcess id="30" name="Rule7" x="249" y="338" width="110" height="48" processId="mro07" >
+    </subProcess>
+    <end id="35" name="End" x="333" y="499" width="48" height="48" />
+    <end id="32" name="End" x="342" y="821" width="48" height="48" />
+    <split id="33" name="Gateway" x="280" y="418" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="35" toType="DROOLS_DEFAULT" name="has diseases" priority="1" type="rule" dialect="mvel" >MroPojo( diseases.size() &gt; 0 )</constraint>
+        <constraint toNodeId="22" toType="DROOLS_DEFAULT" name="no deseases" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <end id="36" name="End" x="159" y="1384" width="48" height="49" />
+    <subProcess id="37" name="Rule8" x="128" y="1304" width="110" height="48" processId="mro08" >
+    </subProcess>
+  </nodes>
+
+  <connections>
+    <connection from="4" to="3" />
+    <connection from="5" to="4" />
+    <connection from="1" to="5" />
+    <connection from="10" to="6" />
+    <connection from="6" to="7" />
+    <connection from="15" to="8" />
+    <connection from="7" to="9" />
+    <connection from="8" to="10" />
+    <connection from="10" to="11" />
+    <connection from="29" to="14" />
+    <connection from="14" to="15" />
+    <connection from="15" to="17" />
+    <connection from="18" to="19" />
+    <connection from="28" to="18" />
+    <connection from="22" to="23" />
+    <connection from="33" to="22" />
+    <connection from="23" to="25" />
+    <connection from="23" to="27" />
+    <connection from="27" to="29" />
+    <connection from="5" to="28" />
+    <connection from="18" to="30" />
+    <connection from="33" to="35" />
+    <connection from="29" to="32" />
+    <connection from="30" to="33" />
+    <connection from="37" to="36" />
+    <connection from="7" to="37" />
+  </connections>
+
+</process>

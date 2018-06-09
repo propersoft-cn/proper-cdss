@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="drools"
+  id="myeclipse.1408431075388"
+  context-root="/drools"
+  j2ee-spec="5.0"
+  archive="drools.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

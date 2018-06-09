@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangp.dao.TestDao">
+   <select id="getTests" resultType="Test" parameterType="Test">
+   		select
+   		 id,
+   		 name
+   		From test
+   		<where> 
+			<if test="id != null">
+			     id =#{id} 
+			</if>
+			<if test=" pwd != null">
+			    and name =#{name}
+			</if>
+		</where> 
+   </select>
+   <select id="getTestByCondition" resultType="Test" parameterType="Test">
+    select id,name 
+       from test 
+       where id=#{id}
+   </select>
+   <insert id="insertTest" parameterType="Test">
+   	 insert into test(id,name) values(#{id},#{name})
+<!--   	<selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">-->
+<!--       SELECT LAST_INSERT_ID() AS id-->
+<!--    </selectKey>-->
+   </insert>
+   <!-- 
+     <insert id="insertUser" useGeneratedKeys="true" parameterType="User" keyProperty="id">
+     insert into user(id,username,account,pwd) value(#{id},#{username},#{account},#{pwd})
+     </insert>
+   -->
+   <update id="updateTest" parameterType="Test">
+   		update test set
+   		<set>
+			<if test="name != null">name=#{name},</if>
+		</set>
+		where id=#{id}
+   </update>
+   <delete id="deleteTest" parameterType="java.lang.String">
+   		delete test where id=#{id} 
+   </delete>
+   
+</mapper>
