@@ -1,0 +1,48 @@
+//created on: 2014-9-1
+package com.zhangp.demo2r1
+
+//list any import classes here.
+import com.zhangp.demo2.HisPojo;
+
+
+//declare any global variables here
+
+
+
+
+rule "r1"
+ruleflow-group "r1"
+
+    when
+        //conditions
+        $hisPojo:HisPojo()
+    then
+        //actions
+        $hisPojo.getDiags().add("糖尿病");
+		System.out.println("=====确诊糖尿病=====");
+end
+
+rule "r2"
+ruleflow-group "r2"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+        $hisPojo:HisPojo()
+    then
+        //actions
+        $hisPojo.getAdvise().add("行OGTT");
+        System.out.println("=====行OGTT=====");
+end
+
+rule "r3"
+ruleflow-group "r3"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+        $hisPojo:HisPojo()
+    then
+        //actions
+        $hisPojo.getAdvise().add("糖代谢正常");
+        System.out.println("=====糖代谢正常=====");
+end
+

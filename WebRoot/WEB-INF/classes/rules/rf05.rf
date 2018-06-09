@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="mro05" id="mro05" package-name="com.zhangp.rf05" >
+
+  <header>
+    <imports>
+      <import name="com.zhangp.pojo.MroPojo" />
+      <import name="com.zhangp.pojo.OpPojo" />
+    </imports>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="16" y="56" width="48" height="48" />
+    <ruleSet id="3" name="Rule5.1" x="177" y="16" width="80" height="48" ruleFlowGroup="rule5.1" />
+    <ruleSet id="5" name="Rule5.2" x="289" y="16" width="80" height="48" ruleFlowGroup="rule5.2" />
+    <end id="6" name="End" x="401" y="16" width="48" height="48" />
+    <split id="7" name="Gateway" x="96" y="56" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="8" toType="DROOLS_DEFAULT" name="constraint" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="3" toType="DROOLS_DEFAULT" name="constraint" priority="1" type="rule" dialect="mvel" >MroPojo( $opPojos:opPojos )
+and
+( 
+//二尖瓣生物瓣膜置换术
+OpPojo( code == '35.23001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//二尖瓣机械瓣膜置换术
+OpPojo( code == '35.24001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//主动脉瓣生物瓣膜置换术
+OpPojo( code == '35.21001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//主动脉瓣机械瓣膜置换术
+OpPojo( code == '35.22001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//未特指心脏瓣膜生物瓣置换术
+OpPojo( code == '35.20001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//未特指心脏瓣膜机械瓣置换术
+OpPojo( code == '35.20002'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//肺动脉瓣生物瓣膜置换术
+OpPojo( code == '35.25001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//肺动脉瓣机械瓣膜置换术
+OpPojo( code == '35.26001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//三尖瓣生物瓣膜置换术
+OpPojo( code == '35.27001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+or
+//三尖瓣机械瓣膜置换术
+OpPojo( code == '35.28001'  &amp;&amp; mainFlg == 'Y') from $opPojos
+)</constraint>
+      </constraints>
+    </split>
+    <end id="8" name="End" x="177" y="96" width="80" height="48" />
+  </nodes>
+
+  <connections>
+    <connection from="7" to="3" />
+    <connection from="3" to="5" />
+    <connection from="5" to="6" />
+    <connection from="1" to="7" />
+    <connection from="7" to="8" />
+  </connections>
+
+</process>

@@ -1,0 +1,35 @@
+//created on: 2015-3-15
+package com.zhangp.demo3r1
+
+//list any import classes here.
+import com.zhangp.pojo.HisPojo
+
+
+//declare any global variables here
+
+
+
+
+rule "rule1"
+
+	ruleflow-group "rule1"
+	
+    when
+        //conditions
+        $hisPojo:HisPojo()
+    then
+        //actions
+        $hisPojo.getAdvise().add("诊断建议:疑缺铁性贫血");
+
+end
+
+rule "rule2"
+    //include attributes such as "salience" here...
+    ruleflow-group "rule2"
+    when
+        //conditions
+        $hisPojo:HisPojo()
+    then
+        //actions
+		$hisPojo.getAdvise().add("诊断建议:甲状腺机能亢进症");
+end

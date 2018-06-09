@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="flow1" id="flow1" package-name="com.zhangp.demo3f1" >
+
+  <header>
+    <imports>
+      <import name="com.zhangp.pojo.HisPojo" />
+      <import name="com.zhangp.pojo.ExaPojo" />
+    </imports>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="16" y="97" width="48" height="48" />
+    <split id="2" name="Gateway" x="96" y="97" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="24" toType="DROOLS_DEFAULT" priority="3" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="4" toType="DROOLS_DEFAULT" name="Å®" priority="2" type="rule" dialect="mvel" >HisPojo(sex == "Å®")</constraint>
+        <constraint toNodeId="3" toType="DROOLS_DEFAULT" name="ÄÐ" priority="1" type="rule" dialect="mvel" >HisPojo(sex == "ÄÐ")</constraint>
+      </constraints>
+    </split>
+    <split id="3" name="Gateway" x="177" y="97" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="5" toType="DROOLS_DEFAULT" name="MCV &lt; 80" priority="1" type="rule" dialect="mvel" >$hisPojo:HisPojo( $exaPojos:exaPojos )
+ExaPojo( testitemCode == "MCV" &amp;&amp; testValue &lt; 80 ) from $exaPojos</constraint>
+        <constraint toNodeId="19" toType="DROOLS_DEFAULT" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <split id="4" name="Gateway" x="177" y="178" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="12" toType="DROOLS_DEFAULT" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="6" toType="DROOLS_DEFAULT" name="MCV &lt; 80" priority="1" type="rule" dialect="mvel" >$hisPojo:HisPojo( $exaPojos:exaPojos )
+ExaPojo( testitemCode == "MCV" &amp;&amp; testValue &lt; 80 ) from $exaPojos</constraint>
+      </constraints>
+    </split>
+    <split id="5" name="Gateway" x="258" y="16" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="7" toType="DROOLS_DEFAULT" name="MCV/RBC &gt; 13" priority="1" type="rule" dialect="mvel" >$hisPojo:HisPojo( $exaPojos:exaPojos )
+ExaPojo( testitemCode == "RBC", $rbc:testValue ) from $exaPojos
+ExaPojo( testitemCode == "MCV" &amp;&amp; testValue/$rbc &gt; 13 ) from $exaPojos</constraint>
+        <constraint toNodeId="21" toType="DROOLS_DEFAULT" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <split id="6" name="Gateway" x="258" y="259" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="8" toType="DROOLS_DEFAULT" name="MCV/RBC &gt; 13" priority="1" type="rule" dialect="mvel" >$hisPojo:HisPojo( $exaPojos:exaPojos )
+ExaPojo( testitemCode == "RBC", $rbc:testValue ) from $exaPojos
+ExaPojo( testitemCode == "MCV" &amp;&amp; testValue/$rbc &gt; 13 ) from $exaPojos</constraint>
+        <constraint toNodeId="13" toType="DROOLS_DEFAULT" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <split id="7" name="Gateway" x="339" y="16" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="23" toType="DROOLS_DEFAULT" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="15" toType="DROOLS_DEFAULT" name="Hb &gt;= 13.5" priority="1" type="rule" dialect="mvel" >$hisPojo:HisPojo( $exaPojos:exaPojos )
+ExaPojo( testitemCode == "Hb" &amp;&amp; testValue &lt; 13.5 ) from $exaPojos</constraint>
+      </constraints>
+    </split>
+    <split id="8" name="Gateway" x="339" y="178" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="14" toType="DROOLS_DEFAULT" priority="2" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="15" toType="DROOLS_DEFAULT" name="Hb &lt; 11.6" priority="1" type="rule" dialect="mvel" >$hisPojo:HisPojo( $exaPojos:exaPojos )
+ExaPojo( testitemCode == "Hb" &amp;&amp; testValue &lt; 11.6 ) from $exaPojos</constraint>
+      </constraints>
+    </split>
+    <end id="12" name="End" x="258" y="178" width="49" height="49" />
+    <end id="13" name="End" x="339" y="259" width="49" height="49" />
+    <end id="14" name="End" x="420" y="178" width="49" height="49" />
+    <join id="15" name="Gateway" x="420" y="97" width="49" height="49" type="3" />
+    <end id="17" name="End" x="613" y="97" width="48" height="48" />
+    <ruleSet id="16" name="È±ÌúÐÔÆ¶Ñª" x="501" y="97" width="80" height="48" ruleFlowGroup="rule1" />
+    <end id="19" name="End" x="258" y="97" width="49" height="49" />
+    <end id="21" name="End" x="339" y="97" width="49" height="49" />
+    <end id="23" name="End" x="420" y="16" width="49" height="49" />
+    <end id="24" name="End" x="177" y="17" width="49" height="48" />
+  </nodes>
+
+  <connections>
+    <connection from="1" to="2" />
+    <connection from="2" to="3" />
+    <connection from="2" to="4" />
+    <connection from="3" to="5" />
+    <connection from="4" to="6" />
+    <connection from="5" to="7" />
+    <connection from="6" to="8" />
+    <connection from="4" to="12" />
+    <connection from="6" to="13" />
+    <connection from="8" to="14" />
+    <connection from="8" to="15" />
+    <connection from="7" to="15" />
+    <connection from="16" to="17" />
+    <connection from="15" to="16" />
+    <connection from="3" to="19" />
+    <connection from="5" to="21" />
+    <connection from="7" to="23" />
+    <connection from="2" to="24" />
+  </connections>
+
+</process>

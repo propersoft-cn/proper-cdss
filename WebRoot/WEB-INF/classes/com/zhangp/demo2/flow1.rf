@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="flow" id="flow1" package-name="com.zhangp.demo2f1" >
+
+  <header>
+    <imports>
+      <import name="com.zhangp.demo2.HisPojo" />
+    </imports>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="396" y="14" width="48" height="48" />
+    <split id="2" name="Gateway" x="395" y="92" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="6" toType="DROOLS_DEFAULT" name="有糖尿病史" priority="1" type="rule" dialect="mvel" >HisPojo( historyOfIllness contains "糖尿病史" )</constraint>
+        <constraint toNodeId="4" toType="DROOLS_DEFAULT" name="无糖尿病史" priority="1" type="rule" dialect="mvel" >eval(true)</constraint>
+      </constraints>
+    </split>
+    <ruleSet id="3" name="确诊糖尿病" x="62" y="438" width="80" height="49" ruleFlowGroup="r1" />
+    <split id="4" name="Gateway" x="395" y="187" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="8" toType="DROOLS_DEFAULT" name="无三多一少症状" priority="1" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="5" toType="DROOLS_DEFAULT" name="有三多一少症状" priority="1" type="rule" dialect="mvel" >HisPojo( symptoms contains "多饮" &amp;&amp; symptoms contains "多食" &amp;&amp; symptoms contains "多尿" &amp;&amp; symptoms contains "体重下降" )</constraint>
+      </constraints>
+    </split>
+    <split id="5" name="Gateway" x="251" y="256" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="12" toType="DROOLS_DEFAULT" name="无至少一次血糖异常" priority="1" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="6" toType="DROOLS_DEFAULT" name="至少一次血糖异常" priority="1" type="rule" dialect="mvel" >HisPojo( (lastExaMap["FBG"] &gt;= 7 || exaMap["FBG"] &gt;= 7) || (lastExaMap["2HBG"] &gt;= 11.1 || exaMap["2HBG"] &gt;= 11.1) || (lastExaMap["BG"] &gt;= 11.1 || exaMap["BG"] &gt;= 11.1) )</constraint>
+      </constraints>
+    </split>
+    <join id="6" name="Gateway" x="78" y="351" width="49" height="49" type="3" />
+    <split id="8" name="Gateway" x="394" y="286" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="9" toType="DROOLS_DEFAULT" name="无至少2次血糖异常" priority="1" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="6" toType="DROOLS_DEFAULT" name="至少2次血糖异常" priority="1" type="rule" dialect="mvel" >HisPojo( ((lastExaMap["FBG"] &gt;= 7 || exaMap["FBG"] &gt;= 7) &amp;&amp; (lastExaMap["2HBG"] &gt;= 11.1 || exaMap["2HBG"] &gt;= 11.1)) || ((lastExaMap["FBG"] &gt;= 7 || exaMap["FBG"] &gt;= 7) &amp;&amp; (lastExaMap["BG"] &gt;= 11.1 || exaMap["BG"] &gt;= 11.1)) || ((lastExaMap["2HBG"] &gt;= 11.1 || exaMap["2HBG"] &gt;= 11.1) &amp;&amp; (lastExaMap["BG"] &gt;= 11.1 || exaMap["BG"] &gt;= 11.1)) )</constraint>
+      </constraints>
+    </split>
+    <split id="9" name="Gateway" x="394" y="376" width="49" height="49" type="2" >
+      <constraints>
+        <constraint toNodeId="14" toType="DROOLS_DEFAULT" name="所有血糖正常" priority="1" type="rule" dialect="mvel" >eval(true)</constraint>
+        <constraint toNodeId="12" toType="DROOLS_DEFAULT" name="并非所有血糖正常" priority="1" type="rule" dialect="mvel" >HisPojo( (lastExaMap["FBG"] &gt; 6.1 || exaMap["FBG"] &gt; 6.1) || (lastExaMap["2HBG"] &gt; 7.8 || exaMap["2HBG"] &gt; 7.8) || (lastExaMap["BG"] &gt; 7.8 || exaMap["BG"] &gt; 7.8) )</constraint>
+      </constraints>
+    </split>
+    <end id="11" name="End" x="254" y="580" width="48" height="48" />
+    <join id="12" name="Gateway" x="252" y="404" width="80" height="49" type="3" />
+    <ruleSet id="13" name="行OGTT" x="236" y="506" width="80" height="48" ruleFlowGroup="r2" />
+    <ruleSet id="14" name="糖代谢正常" x="379" y="489" width="80" height="49" ruleFlowGroup="r3" />
+    <end id="15" name="End" x="397" y="580" width="80" height="48" />
+    <end id="16" name="End" x="77" y="513" width="80" height="48" />
+  </nodes>
+
+  <connections>
+    <connection from="1" to="2" />
+    <connection from="6" to="3" />
+    <connection from="2" to="4" />
+    <connection from="4" to="5" bendpoints="[]" />
+    <connection from="2" to="6" bendpoints="[103,116]" />
+    <connection from="5" to="6" bendpoints="[]" />
+    <connection from="8" to="6" />
+    <connection from="4" to="8" />
+    <connection from="8" to="9" />
+    <connection from="13" to="11" />
+    <connection from="9" to="12" />
+    <connection from="5" to="12" />
+    <connection from="12" to="13" />
+    <connection from="9" to="14" />
+    <connection from="14" to="15" />
+    <connection from="3" to="16" />
+  </connections>
+
+</process>
