@@ -13,17 +13,30 @@ public class KnowledgeBaseTool {
 	private KnowledgeBase kbase2;
 	private KnowledgeBase kbase3;
 	private KnowledgeBase kbase4;
+	private KnowledgeBase kbase5;
 	private KnowledgeBase kbaseMroFlow;
 	private KnowledgeBase kbaseMroRule9;
 	
 	public KnowledgeBaseTool() throws Exception{
-		kbase1 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS1);
+		kbase1 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS5);
 		kbase2 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS2);
 		kbase3 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS3);
 		kbase4 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS4);
+		kbase5 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS7);
 		kbaseMroFlow = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS_MRO_FLOW);
 		kbaseMroRule9 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS_MRO_RULE9);
 	}
+	
+
+	public KnowledgeBase getKbase5() {
+		return kbase5;
+	}
+
+
+	public void setKbase5(KnowledgeBase kbase5) {
+		this.kbase5 = kbase5;
+	}
+
 
 	public KnowledgeBase getKbase1() {
 		return kbase1;

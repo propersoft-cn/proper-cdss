@@ -10,6 +10,7 @@ public class KnowledgeBaseWorkSpace {
 	private static KnowledgeBase kbase4;
 	private static KnowledgeBase kbase5;
 	private static KnowledgeBase kbase6;
+	private static KnowledgeBase kbase7;
 	private static KnowledgeBase kbaseMroFlow;
 	private static KnowledgeBase kbaseMroRule9;
 	private static KnowledgeBase kbaseMroRule1;
@@ -23,6 +24,13 @@ public class KnowledgeBaseWorkSpace {
 	private static KnowledgeBase kbaseMroRule72;
 	private static KnowledgeBase inwrule;
 	private static KnowledgeBase singletranferRule;
+	
+	public static KnowledgeBase getKbase7() {
+		return kbase7;
+	}
+	public static void setKbase7(KnowledgeBase kbase7) {
+		KnowledgeBaseWorkSpace.kbase7 = kbase7;
+	}
 	public static KnowledgeBase getKbase5() {
 		return kbase5;
 	}

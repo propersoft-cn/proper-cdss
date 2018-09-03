@@ -35,6 +35,37 @@ public class ExaPojo {
 	 * 单位
 	 */
 	private String testUnit;
+	
+	private String orderCode;
+
+	private String orderDesc;
+	
+	private String testitemdesc;
+	
+	
+	public String getOrderCode() {
+		return orderCode;
+	}
+
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
+	}
+
+	public String getOrderDesc() {
+		return orderDesc;
+	}
+
+	public void setOrderDesc(String orderDesc) {
+		this.orderDesc = orderDesc;
+	}
+
+	public String getTestitemdesc() {
+		return testitemdesc;
+	}
+
+	public void setTestitemdesc(String testitemdesc) {
+		this.testitemdesc = testitemdesc;
+	}
 
 	/**
 	 * 检验项目码
