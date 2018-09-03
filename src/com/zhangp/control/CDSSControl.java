@@ -35,6 +35,70 @@ import com.zhangp.pojo.OrderPojo;
 @RequestMapping("rest/cdss.do")
 public class CDSSControl {
 	
+	@RequestMapping(params = "method=fireRules9")
+	public void fireRules9(HttpServletRequest request, HttpServletResponse response){
+		
+	
+		String param = "";  
+	      try {  
+	          BufferedReader  bufferedReader =  new BufferedReader( new InputStreamReader( request.getInputStream() ));  
+	          String nextLine = bufferedReader.readLine();  
+	          while( nextLine != null )  
+	          {  
+	        	  param += nextLine;  
+	              nextLine = bufferedReader.readLine();  
+	          }  
+	      } catch (Exception e) {  
+	          e.printStackTrace();  
+	      }
+	      System.out.println("入参=fireRules9==="+param);
+		
+		
+		String s = param;
+
+		
+		response.setCharacterEncoding("gbk");  
+
+		HisPojo hisPojo = JSON2Object(s);
+		
+		
+		try {
+			System.out.println("CDSS 7 成功");
+			
+			StatefulKnowledgeSession ksession = KnowledgeBaseWorkSpace.getKbase7().newStatefulKnowledgeSession();
+
+
+			ksession.insert(hisPojo);
+			
+			ksession.fireAllRules();
+			
+			ksession.dispose();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("CDSS 7 失败");
+		}
+		
+		
+		JSONObject json = JSONObject.fromObject(hisPojo);//将java对象转换为json对象  
+        String jsonStr = json.toString();//将json对象转换为字符串 
+		
+	    
+	    PrintWriter out = null;
+		
+		try {
+			out = response.getWriter(); 
+			
+			
+	        out.append(jsonStr);  
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			out.close();
+		}
+		
+	}
 	
 	@RequestMapping(params = "method=fireRules1")
 	public void fireRules1(HttpServletRequest request, HttpServletResponse response){
@@ -439,6 +503,9 @@ public class CDSSControl {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 			ExaPojo obj11 = (ExaPojo) JSONObject.toBean(jsonObject,
 					ExaPojo.class);
+			if(obj11.getTestValueText().length() == 0){
+				obj11.setTestValueText(null);
+			}
 			objsExaPojo.add(obj11);
 		}
 		hisPojo.setExaPojos(objsExaPojo);

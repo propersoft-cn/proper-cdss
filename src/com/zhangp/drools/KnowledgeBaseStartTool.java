@@ -13,7 +13,7 @@ public class KnowledgeBaseStartTool extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void init() throws ServletException {
-		KnowledgeBase kbase1, kbase2, kbase3, kbase4, kbase5, kbase6,
+		KnowledgeBase kbase1, kbase2, kbase3, kbase4, kbase5, kbase6,kbase7,
 			kbaseMroFlow, kbaseMroRule9, kbaseMroRule1, 
 			kbaseMroRule2, kbaseMroRule3, kbaseMroRule4, 
 			kbaseMroRule5, kbaseMroRule61, kbaseMroRule62,
@@ -25,6 +25,7 @@ public class KnowledgeBaseStartTool extends HttpServlet {
 			kbase4 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS4);
 			kbase5 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS5);
 			kbase6 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS6);
+			kbase7 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS7);
 			kbaseMroFlow = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS_MRO_FLOW);
 			kbaseMroRule9 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS_MRO_RULE9);
 			kbaseMroRule1 = KnowledgeTool.getInstance().readKnowledgeBase(KnowledgePool.DRLS_MRO_RULE1);
@@ -46,6 +47,7 @@ public class KnowledgeBaseStartTool extends HttpServlet {
 			KnowledgeBaseWorkSpace.setKbase4(kbase4);
 			KnowledgeBaseWorkSpace.setKbase5(kbase5);
 			KnowledgeBaseWorkSpace.setKbase6(kbase6);
+			KnowledgeBaseWorkSpace.setKbase7(kbase7);
 			KnowledgeBaseWorkSpace.setKbaseMroFlow(kbaseMroFlow);
 			KnowledgeBaseWorkSpace.setKbaseMroRule9(kbaseMroRule9);
 			KnowledgeBaseWorkSpace.setKbaseMroRule1(kbaseMroRule1);
