@@ -40,7 +40,9 @@ public class KnowledgePool {
 	};
 	public static Object[][] DRLS7 =
 		{ 
+			{	"rules/dt16.xls",	ResourceType.DTABLE	},
 			{	"rules/dt15.xls",	ResourceType.DTABLE	}
+			
 		};
 	
 	public static Object[][] DRLS_MRO_FLOW =
