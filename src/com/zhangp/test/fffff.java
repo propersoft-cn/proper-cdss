@@ -35,7 +35,7 @@ public class fffff {
 		
 		ExaPojo exaPojo = new ExaPojo();
 		exaPojo.setId(sysUtil.generateShortUuid());
-		exaPojo.setTestValueText("总胆固醇.*偏高");
+		exaPojo.setTestValueText("高血压");
 //		exaPojo.setTestitemCode("");
 //		exaPojo.setTestValue(new Double(0));
 //		exaPojo.setTestUnit("");
@@ -45,9 +45,9 @@ public class fffff {
 		
 		exaPojo = new ExaPojo();
 		exaPojo.setId(sysUtil.generateShortUuid());
-		exaPojo.setTestitemCode("WBC");
-		exaPojo.setTestValue(new Double(4.25));
-		exaPojo.setTestUnit("/ul");
+		exaPojo.setTestitemCode("CHO");
+		exaPojo.setTestValue(new Double(6));
+		exaPojo.setTestUnit("mmol/L");
 //		exaPojo.setTestValueText("");
 		exaPojos.add(exaPojo);
 		

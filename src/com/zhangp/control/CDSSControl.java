@@ -51,7 +51,7 @@ public class CDSSControl {
 	      } catch (Exception e) {  
 	          e.printStackTrace();  
 	      }
-	      System.out.println("入参=fireRules9==="+param);
+	      System.out.println("fireRules9==="+param);
 		
 		
 		String s = param;
@@ -63,7 +63,7 @@ public class CDSSControl {
 		
 		
 		try {
-			System.out.println("CDSS 7 成功");
+			System.out.println("CDSS 7  success");
 			
 			StatefulKnowledgeSession ksession = KnowledgeBaseWorkSpace.getKbase7().newStatefulKnowledgeSession();
 
@@ -77,7 +77,7 @@ public class CDSSControl {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("CDSS 7 失败");
+			System.out.println("CDSS 7 error");
 		}
 		
 		
@@ -118,9 +118,7 @@ public class CDSSControl {
 	      }
 	      System.out.println("入参=fireRules1==="+param);
 		
-		
 		String s = param;
-
 		
 		response.setCharacterEncoding("gbk");  
 
@@ -503,9 +501,9 @@ public class CDSSControl {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 			ExaPojo obj11 = (ExaPojo) JSONObject.toBean(jsonObject,
 					ExaPojo.class);
-			if(obj11.getTestValueText().length() == 0){
-				obj11.setTestValueText(null);
-			}
+//			if(obj11.getTestValueText().length() == 0){
+//				obj11.setTestValueText(null);
+//			}
 			objsExaPojo.add(obj11);
 		}
 		hisPojo.setExaPojos(objsExaPojo);
